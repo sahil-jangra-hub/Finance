@@ -1,0 +1,40 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Loan } from './models';
+
+@Component({
+  selector: 'app-loans-table',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: `
+    <section class="card">
+      <div class="card-head"><h3>📒 Loans</h3><input [(ngModel)]="query" (ngModelChange)="queryChange.emit($event)" placeholder="🔍 Search client"></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Client</th><th>Principal</th><th>Int %</th><th>Interest</th><th>Due date</th><th>Days late</th><th>Penalty</th><th>Total due</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          <tr *ngFor="let loan of filteredLoans" [class.late]="loan.daysOverdue > 0">
+            <td><b>{{ loan.clientName }}</b><br><small>{{ loan.mobile }}</small></td>
+            <td>₹{{ loan.principal | number }}</td><td>{{ loan.interestPercent }}%</td>
+            <td>₹{{ loan.interest | number }}</td><td>{{ loan.dueDate | date:'dd MMM yyyy' }}</td>
+            <td>{{ loan.daysOverdue }}</td><td>₹{{ loan.penalty | number }}</td><td><b>₹{{ loan.totalDue | number }}</b></td>
+            <td><span class="badge" [ngClass]="loan.daysOverdue > 0 ? 'late' : loan.status">{{ loan.daysOverdue > 0 ? 'Overdue' : loan.status }}</span></td>
+            <td><button *ngIf="loan.status === 'Active'" class="btn btn-ok btn-sm" (click)="clearLoan.emit(loan.id)">Mark paid</button></td>
+          </tr>
+          <tr *ngIf="!filteredLoans.length"><td colspan="10" class="empty">No loans yet</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+  `
+})
+export class LoansTableComponent {
+  @Input() loans: Loan[] = [];
+  @Input() query = '';
+  @Output() queryChange = new EventEmitter<string>();
+  @Output() clearLoan = new EventEmitter<number>();
+
+  get filteredLoans(): Loan[] {
+    const query = this.query.toLowerCase();
+    return this.loans.filter(loan => loan.clientName.toLowerCase().includes(query));
+  }
+}
