@@ -6,6 +6,6 @@
     <select [(ngModel)]="client.gender"><option>Male</option><option>Female</option><option>Other</option></select>
     <input [(ngModel)]="client.address" placeholder="Address">
   </div>
-  <button class="btn" (click)="save.emit()">Save client</button>
+  <button class="btn" (click)="saveClient()">Save client</button>
   <button *ngIf="client.id" class="btn btn-ghost cancel-button" (click)="cancel.emit()">Cancel</button>
 </div>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { API, ROOT, AuthService } from '../api';
-import { ClientFormComponent } from './components/client-form.component';
+import { ClientFormComponent } from './components/Client form/client-form.component';
 import { ClientsListComponent } from './components/clients-list.component';
 import { DashboardHeaderComponent } from './components/dashboard-header.component';
 import { DashboardStatsComponent } from './components/dashboard-stats.component';
@@ -64,13 +64,6 @@ export class DashComponent {
   load(): void {
     this.h.get<Client[]>(API + '/clients').subscribe(clients => this.clients = clients);
     this.h.get<Loan[]>(API + '/loans').subscribe(loans => this.loans = loans);
-  }
-
-  saveClient(): void {
-    this.h.post(API + '/clients', this.c).subscribe(() => {
-      this.cancelClientEdit();
-      this.load();
-    });
   }
 
   cancelClientEdit(): void {

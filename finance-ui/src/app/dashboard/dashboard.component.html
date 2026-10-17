@@ -8,7 +8,7 @@
   </app-dashboard-stats>
 
   <section class="grid2">
-    <app-client-form [client]="c" (save)="saveClient()" (cancel)="cancelClientEdit()"></app-client-form>
+    <app-client-form [client]="c" (cancel)="cancelClientEdit()"></app-client-form>
     <app-loan-form [loan]="l" [activeClients]="activeClients" (save)="saveLoan()"></app-loan-form>
   </section>
 

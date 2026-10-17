@@ -1,0 +1,1 @@
+export const SaveClient = 'http://localhost:5000/api/clients';
