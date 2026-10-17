@@ -1,0 +1,74 @@
+:host {
+  display: block;
+}
+
+.client {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  background: rgba(79, 70, 229, .03);
+}
+
+.client:hover {
+  box-shadow: var(--shadow);
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--line);
+  border: 3px solid var(--card);
+  box-shadow: var(--shadow);
+}
+
+.info {
+  flex: 1;
+  min-width: 220px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.meta {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.docs a {
+  color: var(--primary);
+  margin-right: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.uploads {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 190px;
+}
+
+.uploads label {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.uploads input[type="file"] {
+  padding: 5px;
+  font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
