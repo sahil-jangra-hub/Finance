@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { API, ROOT, AuthService } from './api';
-import { ClientFormComponent } from './dashboard/client-form.component';
-import { ClientsListComponent } from './dashboard/clients-list.component';
-import { DashboardHeaderComponent } from './dashboard/dashboard-header.component';
-import { DashboardStatsComponent } from './dashboard/dashboard-stats.component';
-import { LoanFormComponent } from './dashboard/loan-form.component';
-import { LoansTableComponent } from './dashboard/loans-table.component';
-import { Client, ClientDocument, ClientDraft, ClientUpload, Loan, LoanDraft } from './dashboard/models';
+import { API, ROOT, AuthService } from '../api';
+import { ClientFormComponent } from './components/client-form.component';
+import { ClientsListComponent } from './components/clients-list.component';
+import { DashboardHeaderComponent } from './components/dashboard-header.component';
+import { DashboardStatsComponent } from './components/dashboard-stats.component';
+import { LoanFormComponent } from './components/loan-form.component';
+import { LoansTableComponent } from './components/loans-table.component';
+import { Client, ClientDocument, ClientDraft, ClientUpload, Loan, LoanDraft } from './models';
 
 @Component({
   selector: 'app-dash',
@@ -23,36 +23,8 @@ import { Client, ClientDocument, ClientDraft, ClientUpload, Loan, LoanDraft } fr
     LoansTableComponent,
     ClientsListComponent
   ],
-  template: `
-    <app-dashboard-header [name]="name" (logout)="out()"></app-dashboard-header>
-    <main class="container">
-      <app-dashboard-stats
-        [lent]="lent"
-        [receivable]="receivable"
-        [overdue]="overdue"
-        [clientCount]="clients.length">
-      </app-dashboard-stats>
-
-      <section class="grid2">
-        <app-client-form [client]="c" (save)="saveClient()" (cancel)="cancelClientEdit()"></app-client-form>
-        <app-loan-form [loan]="l" [activeClients]="activeClients" (save)="saveLoan()"></app-loan-form>
-      </section>
-
-      <app-loans-table [loans]="loans" [(query)]="q" (clearLoan)="clearLoan($event)"></app-loans-table>
-
-      <app-clients-list
-        [clients]="clients"
-        [root]="root"
-        [documents]="docs"
-        [(docType)]="docType"
-        (edit)="editClient($event)"
-        (clearClient)="clearClient($event)"
-        (deleteClient)="del($event)"
-        (showDocuments)="showDocs($event)"
-        (uploadFile)="up($event)">
-      </app-clients-list>
-    </main>
-  `
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
 export class DashComponent {
   readonly root = ROOT;

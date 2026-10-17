@@ -1,0 +1,6 @@
+<section class="stats">
+  <div class="stat"><small>Money lent (active)</small><b>₹{{ lent | number:'1.0-0' }}</b></div>
+  <div class="stat green"><small>Total to receive</small><b>₹{{ receivable | number:'1.0-0' }}</b></div>
+  <div class="stat red"><small>Overdue loans</small><b>{{ overdue }}</b></div>
+  <div class="stat"><small>Clients</small><b>{{ clientCount }}</b></div>
+</section>

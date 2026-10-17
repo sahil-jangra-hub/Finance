@@ -1,0 +1,59 @@
+:host {
+  display: block;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.card-head h3 {
+  margin: 0;
+}
+
+.card-head input {
+  max-width: 240px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 820px;
+}
+
+th {
+  text-align: left;
+  padding: 14px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  border-bottom: 2px solid var(--line);
+}
+
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+tbody tr:hover {
+  background: rgba(79, 70, 229, .05);
+}
+
+tr.late {
+  background: rgba(220, 38, 38, .08);
+}
+
+@media (max-width: 600px) {
+  .card-head input {
+    max-width: 100%;
+  }
+}
