@@ -1,12 +1,12 @@
 export interface Client {
-  id: number;
-  name: string;
-  mobile: string | null;
-  gender: string;
-  address: string | null;
-  status: string;
-  photoPath: string | null;
-  docCount: number;
+  UserId: number;
+  Name: string;
+  Mobile: string | null;
+  Gender: string;
+  Address: string | null;
+  Status: string;
+  PhotoPath: string | null;
+  DocCount: number;
 }
 
 export interface ClientDraft {
@@ -30,6 +30,13 @@ export interface Loan {
   penalty: number;
   totalDue: number;
   status: string;
+}
+
+export interface ClientFormDto {
+  name: string;
+  mobile: string;
+  gender: string;
+  address: string;
 }
 
 export interface LoanDraft {

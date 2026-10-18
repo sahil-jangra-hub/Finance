@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Client, ClientDocument, ClientUpload } from '../models';
+import { Client, ClientDocument, ClientUpload } from '../../models';
+import { ClientDetailsService } from '../client-details.service';
+import { GetClients } from '../../urls';
 
 @Component({
   selector: 'app-clients-list',
@@ -11,7 +13,7 @@ import { Client, ClientDocument, ClientUpload } from '../models';
   styleUrl: './clients-list.component.css'
 })
 export class ClientsListComponent {
-  @Input() clients: Client[] = [];
+  clients: Client[] = [];
   @Input() root = '';
   @Input() documents: Record<number, ClientDocument[]> = {};
   @Input() docType = 'Aadhaar';
@@ -23,6 +25,18 @@ export class ClientsListComponent {
   @Output() uploadFile = new EventEmitter<ClientUpload>();
 
   readonly emptyPhoto = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22/%3E';
+
+  constructor(private clientDetailsService: ClientDetailsService,
+    private cdr: ChangeDetectorRef
+  ) { }
+
+  ngOnInit() {
+    this.clientDetailsService.getClientDetails(GetClients).subscribe((response) => {
+      this.clients = response as Client[];
+      console.log('Client details fetched successfully:', response);
+      this.cdr.detectChanges();
+    });
+  }
 
   upload(event: Event, clientId: number, kind: ClientUpload['kind']): void {
     const input = event.target;

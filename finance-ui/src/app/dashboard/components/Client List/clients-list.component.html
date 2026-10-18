@@ -1,0 +1,31 @@
+<section class="card">
+  <h3>👥 Clients</h3>
+    @if (clients.length > 0) {
+      <span>No clients yet</span>
+    }
+  @for (client of clients; track $index) {
+    <div class="client" >
+      <img class="avatar" [src]="client.PhotoPath ? root + client.PhotoPath : emptyPhoto" alt="">
+      <div class="info">
+        <div class="name">{{ client.Name }} <span class="badge" [ngClass]="client.Status">{{ client.Status }}</span></div>
+        <div class="meta">{{ client.Gender }} · {{ client.Mobile }} · {{ client.Address }}</div>
+        <div class="docs meta">
+          📄 {{ client.DocCount }} documents
+          <a href="#" (click)="showDocuments.emit(client.UserId); $event.preventDefault()">view</a>
+          <a *ngFor="let document of documents[client.UserId]" [href]="root + document.filePath" target="_blank">{{ document.docType }}</a>
+        </div>
+      </div>
+      <div class="uploads">
+        <label>Photo</label><input type="file" (change)="upload($event, client.UserId, 'photo')">
+        <label>Document</label>
+        <select [(ngModel)]="docType" (ngModelChange)="docTypeChange.emit($event)"><option>Aadhaar</option><option>PAN</option><option>Cheque</option><option>Promissory Note</option><option>Other</option></select>
+        <input type="file" (change)="upload($event, client.UserId, 'documents')">
+      </div>
+      <div class="actions">
+        <button class="btn btn-sm" (click)="edit.emit(client)">Edit</button>
+        <button class="btn btn-warn btn-sm" (click)="clearClient.emit(client.UserId)">Clear</button>
+        <button class="btn btn-bad btn-sm" (click)="deleteClient.emit(client.UserId)">Delete</button>
+      </div>
+    </div>
+  }
+</section>

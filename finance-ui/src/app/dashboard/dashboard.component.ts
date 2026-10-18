@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { API, ROOT, AuthService } from '../api';
-import { ClientFormComponent } from './components/client-form.component';
-import { ClientsListComponent } from './components/clients-list.component';
+import { ClientFormComponent } from './components/Client form/client-form.component';
 import { DashboardHeaderComponent } from './components/dashboard-header.component';
 import { DashboardStatsComponent } from './components/dashboard-stats.component';
-import { LoanFormComponent } from './components/loan-form.component';
+import { LoanFormComponent } from './components/loan form/loan-form.component';
 import { LoansTableComponent } from './components/loans-table.component';
 import { Client, ClientDocument, ClientDraft, ClientUpload, Loan, LoanDraft } from './models';
+import { ClientsListComponent } from './components/Client List/clients-list.component';
 
 @Component({
   selector: 'app-dash',
@@ -32,7 +32,6 @@ export class DashComponent {
   clients: Client[] = [];
   loans: Loan[] = [];
   docs: Record<number, ClientDocument[]> = {};
-  c: ClientDraft = { gender: 'Male' };
   l: LoanDraft = { clientId: '' };
   q = '';
   docType = 'Aadhaar';
@@ -58,33 +57,12 @@ export class DashComponent {
   }
 
   get activeClients(): Client[] {
-    return this.clients.filter(client => client.status === 'Active');
+    return this.clients.filter(client => client.Status === 'Active');
   }
 
   load(): void {
     this.h.get<Client[]>(API + '/clients').subscribe(clients => this.clients = clients);
     this.h.get<Loan[]>(API + '/loans').subscribe(loans => this.loans = loans);
-  }
-
-  saveClient(): void {
-    this.h.post(API + '/clients', this.c).subscribe(() => {
-      this.cancelClientEdit();
-      this.load();
-    });
-  }
-
-  cancelClientEdit(): void {
-    this.c = { gender: 'Male' };
-  }
-
-  editClient(client: Client): void {
-    this.c = {
-      id: client.id,
-      name: client.name,
-      mobile: client.mobile,
-      gender: client.gender,
-      address: client.address
-    };
   }
 
   saveLoan(): void {
