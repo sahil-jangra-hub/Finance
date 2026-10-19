@@ -31,9 +31,13 @@ export class ClientsListComponent {
   ) { }
 
   ngOnInit() {
-    this.clientDetailsService.getClientDetails(GetClients).subscribe((response) => {
-      this.clients = response as Client[];
-      console.log('Client details fetched successfully:', response);
+    this.refreshClient();
+  }
+
+  refreshClient(){
+    this.clientDetailsService.getClientDetails(GetClients);
+    this.clientDetailsService.client$.subscribe((clients) => {
+      this.clients = clients;
       this.cdr.detectChanges();
     });
   }

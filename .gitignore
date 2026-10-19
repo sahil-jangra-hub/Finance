@@ -1,0 +1,6 @@
+# .NET build output
+**/bin/
+**/obj/
+
+# Visual Studio workspace data
+**/.vs/

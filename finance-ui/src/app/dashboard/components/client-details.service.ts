@@ -1,10 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Client } from '../models';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientDetailsService {
+  clients = new Subject<Client[]>();
+  client$ = this.clients.asObservable();
+
   constructor(private http: HttpClient) {}
 
 
@@ -16,6 +21,12 @@ export class ClientDetailsService {
   }
 
   getClientDetails(url: string) {
-    return this.http.get(url);
+    return this.http.get(url).subscribe((response) => {
+      this.getClients(response);
+    });
+  }
+
+  private getClients(response: Object) {
+    this.clients.next(response as Client[]);
   }
 }
