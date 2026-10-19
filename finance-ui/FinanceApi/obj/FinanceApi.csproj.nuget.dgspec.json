@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FinanceTracker\\Finance\\finance-ui\\FinanceApi\\FinanceApi.csproj": {}
+    "D:\\FinanceTracker\\Finance\\FinanceApi\\FinanceApi.csproj": {}
   },
   "projects": {
-    "D:\\FinanceTracker\\Finance\\finance-ui\\FinanceApi\\FinanceApi.csproj": {
+    "D:\\FinanceTracker\\Finance\\FinanceApi\\FinanceApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FinanceTracker\\Finance\\finance-ui\\FinanceApi\\FinanceApi.csproj",
+        "projectUniqueName": "D:\\FinanceTracker\\Finance\\FinanceApi\\FinanceApi.csproj",
         "projectName": "FinanceApi",
-        "projectPath": "D:\\FinanceTracker\\Finance\\finance-ui\\FinanceApi\\FinanceApi.csproj",
+        "projectPath": "D:\\FinanceTracker\\Finance\\FinanceApi\\FinanceApi.csproj",
         "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
-        "outputPath": "D:\\FinanceTracker\\Finance\\finance-ui\\FinanceApi\\obj\\",
+        "outputPath": "D:\\FinanceTracker\\Finance\\FinanceApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -8,18 +8,16 @@
   </app-dashboard-stats>
 
   <section class="grid2">
-    <app-client-form [client]="c" (save)="saveClient()" (cancel)="cancelClientEdit()"></app-client-form>
-    <app-loan-form [loan]="l" [activeClients]="activeClients" (save)="saveLoan()"></app-loan-form>
+    <app-client-form></app-client-form>
+    <app-loan-form [activeClients]="activeClients" (save)="saveLoan()"></app-loan-form>
   </section>
 
   <app-loans-table [loans]="loans" [(query)]="q" (clearLoan)="clearLoan($event)"></app-loans-table>
 
   <app-clients-list
-    [clients]="clients"
     [root]="root"
     [documents]="docs"
     [(docType)]="docType"
-    (edit)="editClient($event)"
     (clearClient)="clearClient($event)"
     (deleteClient)="del($event)"
     (showDocuments)="showDocs($event)"

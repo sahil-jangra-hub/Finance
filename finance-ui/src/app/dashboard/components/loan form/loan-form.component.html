@@ -1,0 +1,13 @@
+<div class="card">
+  <h3>🏦 Give Loan</h3>
+  <div class="form-grid">
+    <select>
+      <option *ngFor="let client of activeClients" [value]="client.UserId">{{ client.Name }}</option>
+    </select>
+    <input type="number" [(ngModel)]="clientFormDto.principal" placeholder="Amount ₹">
+    <input type="number" [(ngModel)]="clientFormDto.interestPercent" placeholder="Interest % / month">
+    <input type="date" [(ngModel)]="clientFormDto.dueDate">
+    <input type="number" [(ngModel)]="clientFormDto.penaltyPerDay" placeholder="Penalty ₹ / day">
+  </div>
+  <button class="btn" (click)="saveLoan()">Add loan</button>
+</div>

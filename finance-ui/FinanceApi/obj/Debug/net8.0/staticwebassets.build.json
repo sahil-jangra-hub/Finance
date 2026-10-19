@@ -1,1 +1,20 @@
-{"Version":1,"Hash":"c5IC3loZ4ZrLqjfF5YTG1hVokDwcFZySNl3FYzCrlr4=","Source":"FinanceApi","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[{"Name":"FinanceApi\\wwwroot","Source":"FinanceApi","ContentRoot":"D:\\FinanceTracker\\Finance\\finance-ui\\FinanceApi\\wwwroot\\","BasePath":"/","Pattern":"**"}],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "PM0SiR6Gi06nbYZdhcJkBJE7s+X9AkAEGa/GrJrkhA0=",
+  "Source": "FinanceApi",
+  "BasePath": "_content/FinanceApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "FinanceApi\\wwwroot",
+      "Source": "FinanceApi",
+      "ContentRoot": "D:\\FinanceTracker\\Finance\\FinanceApi\\wwwroot\\",
+      "BasePath": "_content/FinanceApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}
