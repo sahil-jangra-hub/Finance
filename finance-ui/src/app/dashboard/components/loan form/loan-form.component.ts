@@ -14,6 +14,8 @@ import { SaveLoan } from '../../urls';
 })
 export class LoanFormComponent {
   @Input() activeClients: Client[] = [];
+  selectedClientName = '';
+
   clientFormDto: LoanDraft = {
     clientId: '',
     principal: 0,
@@ -24,18 +26,33 @@ export class LoanFormComponent {
 
   constructor(private clientDetailsService: ClientDetailsService) {}
 
-  bindLoanData() {
-    const loanData = {
-      clientId: 2,
+  bindLoanData(): LoanDraft | null {
+    const clientId = this.getClientIdByName(this.selectedClientName);
+    if (clientId === undefined) {
+      return null;
+    }
+
+    return {
+      clientId,
       principal: this.clientFormDto.principal,
       interestPercent: this.clientFormDto.interestPercent,
       dueDate: this.clientFormDto.dueDate,
       penaltyPerDay: this.clientFormDto.penaltyPerDay
     };
-    return loanData;
+  }
+
+  getClientIdByName(clientName: string): number | undefined {
+    const client = this.activeClients.find(c => c.Name === clientName);
+    return client?.Id;
   }
 
   saveLoan(): void {
-    this.clientDetailsService.save(this.bindLoanData(), SaveLoan);
+    const loanData = this.bindLoanData();
+    if (!loanData) {
+      window.alert('Please select a client.');
+      return;
+    }
+
+    this.clientDetailsService.save(loanData, SaveLoan);
   }
 }

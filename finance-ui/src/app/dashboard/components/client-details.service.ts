@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Client } from '../models';
-import { Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +24,15 @@ export class ClientDetailsService {
     return this.http.get(url).subscribe((response) => {
       this.getClients(response);
     });
+  }
+
+  getAllLoans(url: string): Observable<any> {
+    return this.http.get(url).pipe(
+      map((response) => {
+        console.log('Loans fetched successfully:', response);
+        return response;
+      })
+    );
   }
 
   private getClients(response: Object) {

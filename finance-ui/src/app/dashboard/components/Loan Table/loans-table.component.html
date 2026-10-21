@@ -1,0 +1,50 @@
+<section class="card">
+  <div class="card-head">
+    <h3>📒 Loans</h3>
+    <input placeholder="🔍 Search client">
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Principal</th>
+          <th>Int %</th>
+          <th>Interest</th>
+          <th>Due date</th>
+          <th>Days late</th>
+          <th>Penalty</th>
+          <th>Total due</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (loan of clientLoan; track $index) {
+          <tr [class.late]="loan.DaysOverdue > 0">
+            <td><b>{{ loan.ClientName }}</b><br><small>{{ loan.Mobile }}</small></td>
+            <td>₹{{ loan.Principal | number }}</td>
+            <td>{{ loan.InterestPercent }}%</td>
+            <td>₹{{ loan.Interest | number }}</td>
+            <td>{{ loan.DueDate | date:'dd MMM yyyy' }}</td>
+            <td>{{ loan.DaysOverdue }}</td>
+            <td>₹{{ loan.Penalty | number }}</td>
+            <td><b>₹{{ loan.TotalDue | number }}</b></td>
+            <td><span class="badge" [ngClass]="loan.DaysOverdue > 0 ? 'late' : loan.Status">{{ loan.DaysOverdue > 0 ?
+                'Overdue' :
+                loan.Status }}</span></td>
+            <td>
+              @if (loan.Status === 'Active') {
+                <button class="btn btn-ok btn-sm">Mark
+                  paid</button>
+              }
+              </td>
+          </tr>
+          <tr *ngIf="!clientLoan.length">
+            <td colspan="10" class="empty">No loans yet</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

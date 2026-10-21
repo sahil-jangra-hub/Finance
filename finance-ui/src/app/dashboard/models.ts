@@ -1,5 +1,6 @@
 export interface Client {
   UserId: number;
+  Id: number;
   Name: string;
   Mobile: string | null;
   Gender: string;
@@ -18,18 +19,20 @@ export interface ClientDraft {
 }
 
 export interface Loan {
-  id: number;
-  clientId: number;
-  clientName: string;
-  mobile: string;
-  principal: number;
-  interestPercent: number;
-  interest: number;
-  dueDate: string;
-  daysOverdue: number;
-  penalty: number;
-  totalDue: number;
-  status: string;
+  Id: number;
+  ClientId: number;
+  ClientName: string;
+  Mobile: string;
+  Principal: number;
+  InterestPercent: number;
+  Interest: number;
+  DueDate: string;
+  DaysOverdue: number;
+  Penalty: number;
+  TotalDue: number;
+  Status: string;
+  LoanDate: string;
+  PenaltyPerDay: number;
 }
 
 export interface ClientFormDto {

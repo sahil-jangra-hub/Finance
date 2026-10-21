@@ -7,7 +7,7 @@ import { ClientFormComponent } from './components/Client form/client-form.compon
 import { DashboardHeaderComponent } from './components/dashboard-header.component';
 import { DashboardStatsComponent } from './components/dashboard-stats.component';
 import { LoanFormComponent } from './components/loan form/loan-form.component';
-import { LoansTableComponent } from './components/loans-table.component';
+import { LoansTableComponent } from './components/Loan Table/loans-table.component';
 import { Client, ClientDocument, ClientDraft, ClientUpload, Loan, LoanDraft } from './models';
 import { ClientsListComponent } from './components/Client List/clients-list.component';
 
@@ -32,62 +32,30 @@ export class DashComponent {
   clients: Client[] = [];
   loans: Loan[] = [];
   docs: Record<number, ClientDocument[]> = {};
-  l: LoanDraft = { clientId: '' };
   q = '';
   docType = 'Aadhaar';
 
   constructor(private h: HttpClient, private a: AuthService, private r: Router) {
-    this.load();
   }
 
   get activeLoans(): Loan[] {
-    return this.loans.filter(loan => loan.status === 'Active');
+    return this.loans.filter(loan => loan.Status === 'Active');
   }
 
   get lent(): number {
-    return this.activeLoans.reduce((total, loan) => total + loan.principal, 0);
+    return this.activeLoans.reduce((total, loan) => total + loan.Principal, 0);
   }
 
   get receivable(): number {
-    return this.activeLoans.reduce((total, loan) => total + loan.totalDue, 0);
+    return this.activeLoans.reduce((total, loan) => total + loan.TotalDue, 0);
   }
 
   get overdue(): number {
-    return this.activeLoans.filter(loan => loan.daysOverdue > 0).length;
+    return this.activeLoans.filter(loan => loan.DaysOverdue > 0).length;
   }
 
   get activeClients(): Client[] {
     return this.clients.filter(client => client.Status === 'Active');
-  }
-
-  load(): void {
-    this.h.get<Client[]>(API + '/clients').subscribe(clients => this.clients = clients);
-    this.h.get<Loan[]>(API + '/loans').subscribe(loans => this.loans = loans);
-  }
-
-  saveLoan(): void {
-    this.h.post(API + '/loans', this.l).subscribe(() => {
-      this.l = { clientId: '' };
-      this.load();
-    });
-  }
-
-  clearLoan(id: number): void {
-    if (confirm('Mark as paid?')) {
-      this.h.post(API + `/loans/${id}/clear`, {}).subscribe(() => this.load());
-    }
-  }
-
-  clearClient(id: number): void {
-    if (confirm('Clear client and all loans?')) {
-      this.h.post(API + `/clients/${id}/clear`, {}).subscribe(() => this.load());
-    }
-  }
-
-  del(id: number): void {
-    if (confirm('Delete client?')) {
-      this.h.delete(API + `/clients/${id}`).subscribe(() => this.load());
-    }
   }
 
   showDocs(id: number): void {
@@ -98,7 +66,6 @@ export class DashComponent {
     const form = new FormData();
     form.append('file', upload.file);
     form.append('docType', upload.docType);
-    this.h.post(API + `/clients/${upload.clientId}/${upload.kind}`, form).subscribe(() => this.load());
   }
 
   out(): void {

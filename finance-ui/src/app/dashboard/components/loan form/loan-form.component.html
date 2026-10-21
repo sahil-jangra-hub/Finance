@@ -1,8 +1,9 @@
 <div class="card">
   <h3>🏦 Give Loan</h3>
   <div class="form-grid">
-    <select>
-      <option *ngFor="let client of activeClients" [value]="client.UserId">{{ client.Name }}</option>
+    <select [(ngModel)]="selectedClientName">
+      <option value="" disabled>Select a client</option>
+      <option *ngFor="let client of activeClients" [value]="client.Name">{{ client.Name }}</option>
     </select>
     <input type="number" [(ngModel)]="clientFormDto.principal" placeholder="Amount ₹">
     <input type="number" [(ngModel)]="clientFormDto.interestPercent" placeholder="Interest % / month">
