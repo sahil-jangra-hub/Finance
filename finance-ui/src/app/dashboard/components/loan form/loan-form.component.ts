@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Client, LoanDraft } from '../../models';
+import { LoanDraft } from '../../models';
 import { ClientDetailsService } from '../client-details.service';
 import { SaveLoan } from '../../urls';
 
@@ -13,7 +13,6 @@ import { SaveLoan } from '../../urls';
   styleUrl: './loan-form.component.css'
 })
 export class LoanFormComponent {
-  @Input() activeClients: Client[] = [];
   selectedClientName = '';
 
   clientFormDto: LoanDraft = {
@@ -24,7 +23,7 @@ export class LoanFormComponent {
     penaltyPerDay: 0
   }
 
-  constructor(private clientDetailsService: ClientDetailsService) {}
+  constructor(public clientDetailsService: ClientDetailsService) {}
 
   bindLoanData(): LoanDraft | null {
     const clientId = this.getClientIdByName(this.selectedClientName);
@@ -42,7 +41,7 @@ export class LoanFormComponent {
   }
 
   getClientIdByName(clientName: string): number | undefined {
-    const client = this.activeClients.find(c => c.Name === clientName);
+    const client = this.clientDetailsService.clientList().find(c => c.Name === clientName);
     return client?.Id;
   }
 

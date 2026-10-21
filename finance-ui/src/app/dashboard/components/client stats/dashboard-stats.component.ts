@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { ClientDetailsService } from '../client-details.service';
 
 @Component({
   selector: 'app-dashboard-stats',
@@ -9,8 +10,5 @@ import { DecimalPipe } from '@angular/common';
   styleUrl: './dashboard-stats.component.css'
 })
 export class DashboardStatsComponent {
-  @Input() lent = 0;
-  @Input() receivable = 0;
-  @Input() overdue = 0;
-  @Input() clientCount = 0;
+  constructor(public clientDetailsService: ClientDetailsService) {}
 }

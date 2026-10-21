@@ -3,7 +3,7 @@
   <div class="form-grid">
     <select [(ngModel)]="selectedClientName">
       <option value="" disabled>Select a client</option>
-      <option *ngFor="let client of activeClients" [value]="client.Name">{{ client.Name }}</option>
+      <option *ngFor="let client of clientDetailsService.activeClients()" [value]="client.Name">{{ client.Name }}</option>
     </select>
     <input type="number" [(ngModel)]="clientFormDto.principal" placeholder="Amount ₹">
     <input type="number" [(ngModel)]="clientFormDto.interestPercent" placeholder="Interest % / month">

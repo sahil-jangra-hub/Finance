@@ -22,6 +22,7 @@ export class LoansTableComponent implements OnInit {
   ngOnInit(): void {
     this.clientDetailsService.getAllLoans(GetLoansList).subscribe(loans => {
       this.clientLoan = loans;
+      this.clientDetailsService.updateLoanStats(loans);
       this.cdr.detectChanges();
     });
   }

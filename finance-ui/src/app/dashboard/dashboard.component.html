@@ -1,15 +1,11 @@
 <app-dashboard-header [name]="name" (logout)="out()"></app-dashboard-header>
 <main class="container">
-  <app-dashboard-stats
-    [lent]="lent"
-    [receivable]="receivable"
-    [overdue]="overdue"
-    [clientCount]="clients.length">
+  <app-dashboard-stats>
   </app-dashboard-stats>
 
   <section class="grid2">
     <app-client-form></app-client-form>
-    <app-loan-form [activeClients]="activeClients"></app-loan-form>
+    <app-loan-form></app-loan-form>
   </section>
 
   <app-loans-table></app-loans-table>
